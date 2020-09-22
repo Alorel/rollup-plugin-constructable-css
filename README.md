@@ -54,3 +54,20 @@ export default {
   ]
 }
 ```
+
+# Transformation
+
+## Input
+
+```css
+body{color:red};
+```
+
+## Output
+
+```javascript
+var stylesheet = new CSSStyleSheet();
+stylesheet.replaceSync("body{color:red};");
+
+export default stylesheet;
+```
