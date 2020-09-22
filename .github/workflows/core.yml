@@ -74,6 +74,21 @@ jobs:
           YARN_NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Test
         run: yarn run test --forbid-only --forbid-pending
+      - name: Upload coverage
+        uses: coverallsapp/github-action@v1.1.2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          flag-name: node${{ matrix.node }}-on-${{ matrix.os }}
+          parallel: true
+  posttest:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Finalise coverage report
+        uses: coverallsapp/github-action@v1.1.2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          parallel-finished: true
   release:
     runs-on: ${{ matrix.os }}
     if: ${{ github.ref == 'refs/heads/master' }}
