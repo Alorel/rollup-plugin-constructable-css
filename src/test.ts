@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import * as fs from 'fs/promises';
+import {promises as fs} from 'fs';
 import {join} from 'path';
 import {ModuleJSON, rollup, RollupBuild} from 'rollup';
 import * as tmp from 'tmp';
